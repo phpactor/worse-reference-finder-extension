@@ -13,9 +13,9 @@
 
     "require": {
         "phpactor/container": "^1.0",
-        "phpactor/reference-finder-extension": "^0.1.0@dev",
-        "phpactor/worse-reference-finders": "^0.1.0@dev",
-        "phpactor/worse-reflection-extension": "^0.1.0"
+        "phpactor/reference-finder-extension": "~0.1",
+        "phpactor/worse-reference-finders": "~0.1",
+        "phpactor/worse-reflection-extension": "~0.1"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.10.6",
