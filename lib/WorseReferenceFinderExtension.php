@@ -40,7 +40,7 @@ class WorseReferenceFinderExtension implements Extension
     public function configure(Resolver $schema)
     {
         $schema->setDefaults([
-            self::PARAM_BREAK_CHARS => [' ', '"', '\'', '|', '%', '(', ')', '[', ']',':']
+            self::PARAM_BREAK_CHARS => [' ', '"', '\'', '|', '%', '(', ')', '[', ']',':',"\r\n", "\n", "\r"]
         ]);
         $schema->setTypes([
             self::PARAM_BREAK_CHARS => 'array',
