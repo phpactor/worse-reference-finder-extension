@@ -40,6 +40,6 @@ class WorseReferenceFinderExtensionTest extends TestCase
             ByteOffset::fromInt(3)
         );
 
-        $this->assertEquals(realpath(__DIR__ . '/../../lib/WorseReferenceFinderExtension.php'), $location->uri());
+        $this->assertEquals(realpath(__DIR__ . '/../../lib/WorseReferenceFinderExtension.php'), $location->uri()->path());
     }
 }
