@@ -28,7 +28,7 @@ class WorseReferenceFinderExtensionTest extends TestCase
             ComposerAutoloaderExtension::class,
             LoggingExtension::class,
         ], [
-            'file_path_resolver.application_root' => __DIR__ . '/..',
+            'file_path_resolver.application_root' => __DIR__ . '/../..',
         ]);
 
         $locator = $container->get(ReferenceFinderExtension::SERVICE_DEFINITION_LOCATOR);
