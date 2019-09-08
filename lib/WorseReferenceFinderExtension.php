@@ -6,8 +6,10 @@ use Phpactor\Container\Container;
 use Phpactor\Container\ContainerBuilder;
 use Phpactor\Container\Extension;
 use Phpactor\Extension\ReferenceFinder\ReferenceFinderExtension;
+use Phpactor\Extension\SourceCodeFilesystem\SourceCodeFilesystemExtension;
 use Phpactor\Extension\WorseReflection\WorseReflectionExtension;
 use Phpactor\MapResolver\Resolver;
+use Phpactor\WorseReferenceFinder\SourceCodeFilesystem\WorseClassImplementationFinder;
 use Phpactor\WorseReferenceFinder\WorsePlainTextClassDefinitionLocator;
 use Phpactor\WorseReferenceFinder\WorseReflectionDefinitionLocator;
 
@@ -32,6 +34,13 @@ class WorseReferenceFinderExtension implements Extension
                 $container->getParameter(self::PARAM_BREAK_CHARS)
             );
         }, [ ReferenceFinderExtension::TAG_DEFINITION_LOCATOR => []]);
+
+        $container->register('worse_reference_finder.implementation_finder.worse', function (Container $container) {
+            return new WorseClassImplementationFinder(
+                $container->get(WorseReflectionExtension::SERVICE_REFLECTOR),
+                $container->get(SourceCodeFilesystemExtension::SERVICE_FILESYSTEM_COMPOSER)
+            );
+        }, [ ReferenceFinderExtension::TAG_IMPLEMENTATION_FINDER=> []]);
     }
 
     /**
