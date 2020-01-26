@@ -33,6 +33,13 @@
             "Phpactor\\Extension\\WorseReferenceFinder\\Tests\\": "tests/"
         }
     },
+    "scripts": {
+        "integrate": [
+            "./vendor/bin/php-cs-fixer fix",
+            "./vendor/bin/phpstan analyse --level=7",
+            "./vendor/bin/phpunit"
+        ]
+    },
     "extra": {
         "phpactor.extension_class": "Phpactor\\Extension\\WorseReferenceFinder\\WorseReferenceFinderExtension",
         "branch-alias": {
