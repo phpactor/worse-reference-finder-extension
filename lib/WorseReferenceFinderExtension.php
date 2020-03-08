@@ -10,6 +10,7 @@ use Phpactor\Extension\WorseReflection\WorseReflectionExtension;
 use Phpactor\MapResolver\Resolver;
 use Phpactor\WorseReferenceFinder\WorsePlainTextClassDefinitionLocator;
 use Phpactor\WorseReferenceFinder\WorseReflectionDefinitionLocator;
+use Phpactor\WorseReferenceFinder\WorseReflectionTypeLocator;
 
 class WorseReferenceFinderExtension implements Extension
 {
@@ -25,6 +26,11 @@ class WorseReferenceFinderExtension implements Extension
                 $container->get(WorseReflectionExtension::SERVICE_REFLECTOR)
             );
         }, [ ReferenceFinderExtension::TAG_DEFINITION_LOCATOR => []]);
+        $container->register('worse_reference_finder.type_locator.reflection', function (Container $container) {
+            return new WorseReflectionTypeLocator(
+                $container->get(WorseReflectionExtension::SERVICE_REFLECTOR)
+            );
+        }, [ ReferenceFinderExtension::TAG_TYPE_LOCATOR => []]);
 
         $container->register('worse_reference_finder.definition_locator.plain_text_class', function (Container $container) {
             return new WorsePlainTextClassDefinitionLocator(
