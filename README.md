@@ -1,4 +1,4 @@
 WorseReferenceFinder
 ====================
 
-[![Build Status](https://travis-ci.org/phpactor/worse-reference-finder-extension.svg?branch=master)](https://travis-ci.org/phpactor/worse-reference-finder-extension)
+![CI](https://github.com/phpactor/worse-reference-finder-extension/workflows/CI/badge.svg)
