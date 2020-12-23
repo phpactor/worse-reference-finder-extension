@@ -1,9 +1,8 @@
 {
     "name": "phpactor/worse-reference-finder-extension",
+    "type": "phpactor-extension",
     "description": "Worse reflection implementations for reference finding",
     "license": "MIT",
-    "type": "phpactor-extension",
-    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Daniel Leech",
@@ -19,9 +18,16 @@
         "phpactor/worse-reflection-extension": "^0.2"
     },
     "require-dev": {
+        "ergebnis/composer-normalize": "^2.0",
+        "friendsofphp/php-cs-fixer": "^2.17",
         "phpstan/phpstan": "~0.12.0",
-        "phpunit/phpunit": "^7.5",
-        "friendsofphp/php-cs-fixer": "^2.13"
+        "phpunit/phpunit": "^7.5"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        },
+        "phpactor.extension_class": "Phpactor\\Extension\\WorseReferenceFinder\\WorseReferenceFinderExtension"
     },
     "autoload": {
         "psr-4": {
@@ -33,17 +39,13 @@
             "Phpactor\\Extension\\WorseReferenceFinder\\Tests\\": "tests/"
         }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "scripts": {
         "integrate": [
             "./vendor/bin/php-cs-fixer fix",
             "./vendor/bin/phpstan analyse --level=7",
             "./vendor/bin/phpunit"
         ]
-    },
-    "extra": {
-        "phpactor.extension_class": "Phpactor\\Extension\\WorseReferenceFinder\\WorseReferenceFinderExtension",
-        "branch-alias": {
-            "dev-master": "0.1.x-dev"
-        }
     }
 }
