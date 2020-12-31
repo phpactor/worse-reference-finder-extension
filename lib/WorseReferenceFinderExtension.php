@@ -2,6 +2,7 @@
 
 namespace Phpactor\Extension\WorseReferenceFinder;
 
+use Microsoft\PhpParser\Parser;
 use Phpactor\Container\Container;
 use Phpactor\Container\ContainerBuilder;
 use Phpactor\Container\Extension;
@@ -11,6 +12,7 @@ use Phpactor\MapResolver\Resolver;
 use Phpactor\WorseReferenceFinder\WorsePlainTextClassDefinitionLocator;
 use Phpactor\WorseReferenceFinder\WorseReflectionDefinitionLocator;
 use Phpactor\WorseReferenceFinder\WorseReflectionTypeLocator;
+use Phpactor\WorseReferenceFinder\TolerantVariableReferenceFinder;
 
 class WorseReferenceFinderExtension implements Extension
 {
@@ -38,6 +40,12 @@ class WorseReferenceFinderExtension implements Extension
                 $container->getParameter(self::PARAM_BREAK_CHARS)
             );
         }, [ ReferenceFinderExtension::TAG_DEFINITION_LOCATOR => []]);
+
+        $container->register('worse_reference_finder.reference_finder.variable', function (Container $container) {
+            return new TolerantVariableReferenceFinder(
+                new Parser()
+            );
+        }, [ ReferenceFinderExtension::TAG_REFERENCE_FINDER => []]);
     }
 
     /**
