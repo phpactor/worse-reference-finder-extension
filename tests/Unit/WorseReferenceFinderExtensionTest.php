@@ -13,6 +13,7 @@ use Phpactor\Extension\WorseReferenceFinder\WorseReferenceFinderExtension;
 use Phpactor\Extension\WorseReflection\WorseReflectionExtension;
 use Phpactor\FilePathResolverExtension\FilePathResolverExtension;
 use Phpactor\ReferenceFinder\DefinitionLocator;
+use Phpactor\ReferenceFinder\ReferenceFinder;
 use Phpactor\ReferenceFinder\TypeLocator;
 use Phpactor\TextDocument\ByteOffset;
 use Phpactor\TextDocument\TextDocumentBuilder;
@@ -51,6 +52,25 @@ class WorseReferenceFinderExtensionTest extends TestCase
         );
 
         $this->assertEquals('/foo', $location->uri()->path());
+    }
+
+    public function testLocateVariable(): void
+    {
+        $container = $this->createContainer();
+        $locator = $container->get(ReferenceFinder::class);
+
+        assert($locator instanceof ReferenceFinder);
+
+        $location = $locator->findReferences(
+            TextDocumentBuilder::create(
+                <<<'EOT'
+<?php $var1 = 2; $var1++;
+EOT
+            )->language('php')->uri('/foo')->build(),
+            ByteOffset::fromInt(10)
+        );
+
+        $this->assertEquals(1, count(iterator_to_array($location)));
     }
 
     private function createContainer(): Container
