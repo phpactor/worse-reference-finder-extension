@@ -19,7 +19,7 @@ class WorseReferenceFinderExtension implements Extension
     /**
      * {@inheritDoc}
      */
-    public function load(ContainerBuilder $container)
+    public function load(ContainerBuilder $container): void
     {
         $container->register('worse_reference_finder.definition_locator.reflection', function (Container $container) {
             return new WorseReflectionDefinitionLocator(
@@ -43,7 +43,7 @@ class WorseReferenceFinderExtension implements Extension
     /**
      * {@inheritDoc}
      */
-    public function configure(Resolver $schema)
+    public function configure(Resolver $schema): void
     {
         $schema->setDefaults([
             self::PARAM_BREAK_CHARS => [' ', '"', '\'', '|', '%', '(', ')', '[', ']',':',"\r\n", "\n", "\r"]

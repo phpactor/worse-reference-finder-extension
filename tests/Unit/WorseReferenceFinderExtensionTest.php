@@ -19,7 +19,7 @@ use Phpactor\TextDocument\TextDocumentBuilder;
 
 class WorseReferenceFinderExtensionTest extends TestCase
 {
-    public function testLocateDefinition()
+    public function testLocateDefinition(): void
     {
         $container = $this->createContainer();
         $locator = $container->get(ReferenceFinderExtension::SERVICE_DEFINITION_LOCATOR);
@@ -34,7 +34,7 @@ class WorseReferenceFinderExtensionTest extends TestCase
         $this->assertEquals(realpath(__DIR__ . '/../../lib/WorseReferenceFinderExtension.php'), $location->uri()->path());
     }
 
-    public function testLocateType()
+    public function testLocateType(): void
     {
         $container = $this->createContainer();
         $locator = $container->get(ReferenceFinderExtension::SERVICE_TYPE_LOCATOR);
@@ -44,8 +44,8 @@ class WorseReferenceFinderExtensionTest extends TestCase
         $location = $locator->locateType(
             TextDocumentBuilder::create(
                 <<<'EOT'
-<?php class Foobar{};
-EOT
+                    <?php class Foobar{};
+                    EOT
             )->language('php')->uri('/foo')->build(),
             ByteOffset::fromInt(10)
         );
