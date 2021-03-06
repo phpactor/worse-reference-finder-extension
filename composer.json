@@ -14,7 +14,7 @@
         "phpactor/container": "^2.0.0",
         "phpactor/reference-finder-extension": "^0.1.7",
         "phpactor/source-code-filesystem-extension": "^0.1.5",
-        "phpactor/worse-reference-finders": "^0.2.5",
+        "phpactor/worse-reference-finders": "^0.2.6",
         "phpactor/worse-reflection-extension": "^0.2.4"
     },
     "require-dev": {
@@ -44,7 +44,7 @@
     "prefer-stable": true,
     "scripts": {
         "integrate": [
-            "./vendor/bin/php-cs-fixer fix",
+            "./vendor/bin/php-cs-fixer fix --allow-risky=yes",
             "./vendor/bin/phpstan analyse --level=7",
             "./vendor/bin/phpunit"
         ]

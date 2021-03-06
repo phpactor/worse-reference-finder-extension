@@ -1,3 +1,7 @@
+/vendor
+/composer.lock
+/.php_cs.cache
+/stubs
 .phpunit.result.cache
 /.vscode
 /vendor
