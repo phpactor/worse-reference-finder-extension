@@ -64,8 +64,8 @@ class WorseReferenceFinderExtensionTest extends TestCase
         $location = $locator->findReferences(
             TextDocumentBuilder::create(
                 <<<'EOT'
-<?php $var1 = 2; $var1++;
-EOT
+                    <?php $var1 = 2; $var1++;
+                    EOT
             )->language('php')->uri('/foo')->build(),
             ByteOffset::fromInt(10)
         );
