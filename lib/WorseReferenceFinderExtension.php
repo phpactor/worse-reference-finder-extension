@@ -9,6 +9,7 @@ use Phpactor\Container\Extension;
 use Phpactor\Extension\ReferenceFinder\ReferenceFinderExtension;
 use Phpactor\Extension\WorseReflection\WorseReflectionExtension;
 use Phpactor\MapResolver\Resolver;
+use Phpactor\WorseReferenceFinder\TolerantVariableDefintionLocator;
 use Phpactor\WorseReferenceFinder\WorsePlainTextClassDefinitionLocator;
 use Phpactor\WorseReferenceFinder\WorseReflectionDefinitionLocator;
 use Phpactor\WorseReferenceFinder\WorseReflectionTypeLocator;
@@ -41,9 +42,18 @@ class WorseReferenceFinderExtension implements Extension
             );
         }, [ ReferenceFinderExtension::TAG_DEFINITION_LOCATOR => []]);
 
+        $container->register('worse_reference_finder.definition_locator.variable', function (Container $container) {
+            return new TolerantVariableDefintionLocator(
+                new TolerantVariableReferenceFinder(
+                    $container->get('worse_reflection.tolerant_parser'),
+                    true
+                )
+            );
+        }, [ ReferenceFinderExtension::TAG_DEFINITION_LOCATOR => []]);
+
         $container->register('worse_reference_finder.reference_finder.variable', function (Container $container) {
             return new TolerantVariableReferenceFinder(
-                new Parser()
+                $container->get('worse_reflection.tolerant_parser'),
             );
         }, [ ReferenceFinderExtension::TAG_REFERENCE_FINDER => []]);
     }
