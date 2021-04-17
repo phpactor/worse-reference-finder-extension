@@ -14,6 +14,7 @@ use Phpactor\WorseReferenceFinder\WorsePlainTextClassDefinitionLocator;
 use Phpactor\WorseReferenceFinder\WorseReflectionDefinitionLocator;
 use Phpactor\WorseReferenceFinder\WorseReflectionTypeLocator;
 use Phpactor\WorseReferenceFinder\TolerantVariableReferenceFinder;
+use Phpactor\WorseReflection\Core\Cache;
 
 class WorseReferenceFinderExtension implements Extension
 {
@@ -26,7 +27,8 @@ class WorseReferenceFinderExtension implements Extension
     {
         $container->register('worse_reference_finder.definition_locator.reflection', function (Container $container) {
             return new WorseReflectionDefinitionLocator(
-                $container->get(WorseReflectionExtension::SERVICE_REFLECTOR)
+                $container->get(WorseReflectionExtension::SERVICE_REFLECTOR),
+                $container->get(Cache::class)
             );
         }, [ ReferenceFinderExtension::TAG_DEFINITION_LOCATOR => []]);
         $container->register('worse_reference_finder.type_locator.reflection', function (Container $container) {
